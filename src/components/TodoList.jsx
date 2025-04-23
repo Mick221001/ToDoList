@@ -18,11 +18,16 @@ function TodoList() {
     <div>
       <h1>Lista delle Attività</h1>
       <AddTodo onAddTodo={handleAddTodo} />
-      <ul>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} onRemoveTodo={handleRemoveTodo} />
-        ))}
-      </ul>
+      
+      {todos.length === 0 ? (
+        <p>Non hai ancora aggiunto nessuna attività.</p>
+      ) : (
+        <ul>
+          {todos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} onRemoveTodo={handleRemoveTodo} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

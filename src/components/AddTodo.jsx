@@ -1,13 +1,19 @@
-// src/components/AddTodo.js
 import React, { useState } from 'react';
 
 function AddTodo({ onAddTodo }) {
   const [newTodo, setNewTodo] = useState('');
 
   const handleAddTodo = () => {
-    if (newTodo.trim()) {
-      onAddTodo({ id: Date.now(), text: newTodo });
+    const trimmed = newTodo.trim();
+    if (trimmed) {
+      onAddTodo({ id: Date.now(), text: trimmed });
       setNewTodo('');
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleAddTodo();
     }
   };
 
@@ -17,6 +23,7 @@ function AddTodo({ onAddTodo }) {
         type="text"
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Aggiungi una nuova attività"
       />
       <button onClick={handleAddTodo}>Aggiungi</button>
